@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>云记录 · 理想卡原型</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@500;600;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="prototype.css">
+</head>
+<body>
+
+<div class="doc-head">
+  <div class="kicker">云记录 · UI 原型 / 03</div>
+  <h1>理想卡</h1>
+  <div class="sub">理想列表 · 新建 · AI 拆解任务 · 每日打卡 · 打卡日历 —— 把理想拆成每天的一小步</div>
+  <div class="legend"><span>AI 拆解</span><span>每日打卡</span><span>打卡日历</span><span>公开/私密</span></div>
+</div>
+
+<div class="grid">
+
+  <!-- ============ 理想列表 ============ -->
+  <div class="frame">
+    <div class="frame-bar"><div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div><span class="frame-title">理想列表</span><span class="frame-tag">/ideal</span></div>
+    <div class="app">
+      <div class="topnav">
+        <div class="logo">云记录</div>
+        <div class="nav-links"><a>首页</a><a>记录</a><a class="on">理想</a><a>胶囊</a><a>我的</a></div>
+        <div class="avatar">鱼</div>
+      </div>
+      <div class="content">
+        <div class="page-head"><div class="t">我的理想</div><div class="s">每一个理想，都在一点点靠近。</div></div>
+
+        <div class="sect-t">进行中 · 2</div>
+        <div class="ideal">
+          <div class="t">学会弹一首完整的歌</div>
+          <div class="d">把一首曲子练到能完整弹下来</div>
+          <div class="bar"><i style="width:58%"></i></div>
+          <div class="meta"><span>7 / 12 步</span><span>私密</span></div>
+        </div>
+        <div class="ideal">
+          <div class="t">每周读完一本书</div>
+          <div class="d">睡前半小时，放下手机</div>
+          <div class="bar"><i style="width:30%"></i></div>
+          <div class="meta"><span>3 / 10 周</span><span>公开</span></div>
+        </div>
+
+        <div class="sect-t">已完成 · 1</div>
+        <div class="ideal" style="opacity:.78">
+          <div class="t">早睡打卡 21 天</div>
+          <div class="bar"><i style="width:100%"></i></div>
+          <div class="meta"><span>已完成</span><span>私密</span></div>
+        </div>
+
+        <button class="btn btn-p btn-block">种下一个新理想</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 新建理想 ============ -->
+  <div class="frame">
+    <div class="frame-bar"><div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div><span class="frame-title">新建理想</span><span class="frame-tag">/ideal/new</span></div>
+    <div class="app">
+      <div class="topnav">
+        <div class="logo">云记录</div>
+        <div class="nav-links"><a>首页</a><a>记录</a><a class="on">理想</a><a>胶囊</a><a>我的</a></div>
+        <div class="avatar">鱼</div>
+      </div>
+      <div class="content">
+        <div class="page-head"><div class="t">种下一个理想</div><div class="s">不用很大，能让你心动就好。</div></div>
+
+        <label class="f">理想标题</label>
+        <input class="inp" placeholder="比如：学会弹一首完整的歌">
+
+        <label class="f">描述（可选）</label>
+        <textarea class="inp" placeholder="它为什么重要？想对未来的自己说点什么？" style="min-height:64px"></textarea>
+
+        <label class="f">可见性</label>
+        <div class="row-list">
+          <div class="li"><div class="txt"><div class="t">私密</div><div class="s">只给自己看</div></div><div class="switch on"></div></div>
+          <div class="li" style="opacity:.6"><div class="txt"><div class="t">公开</div><div class="s">展示在个人主页（二期开放）</div></div><div class="switch"></div></div>
+        </div>
+
+        <label class="f">目标日期（可选）</label>
+        <input class="inp" placeholder="2026-12-31">
+
+        <button class="btn btn-p btn-block" style="margin-top:16px">创建理想</button>
+        <div class="hint" style="text-align:center;margin-top:8px">创建后可以让 AI 帮你拆解成小步骤</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 理想详情 · 打卡 ============ -->
+  <div class="frame">
+    <div class="frame-bar"><div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div><span class="frame-title">理想详情 · 打卡</span><span class="frame-tag">/ideal/[id]</span></div>
+    <div class="app">
+      <div class="topnav">
+        <div class="logo">云记录</div>
+        <div class="nav-links"><a>首页</a><a>记录</a><a class="on">理想</a><a>胶囊</a><a>我的</a></div>
+        <div class="avatar">鱼</div>
+      </div>
+      <div class="content">
+        <div class="page-head"><div class="t">学会弹一首完整的歌</div><div class="s">私密 · 连续 4 天</div></div>
+
+        <div class="ideal" style="margin-bottom:6px">
+          <div class="bar"><i style="width:58%"></i></div>
+          <div class="meta"><span>已完成 7 / 12 步</span><span>还剩 5 步</span></div>
+        </div>
+
+        <div class="sect-t">小步骤（AI 拆解）</div>
+        <div class="row-list">
+          <div class="li"><span class="check">✓</span><div class="txt" style="opacity:.6"><div class="t" style="text-decoration:line-through">认识五线谱与基础手型</div></div></div>
+          <div class="li"><span class="check">✓</span><div class="txt" style="opacity:.6"><div class="t" style="text-decoration:line-through">练熟右手旋律</div></div></div>
+          <div class="li"><span class="check" style="color:var(--blue)">•</span><div class="txt"><div class="t">练熟左手和弦</div><div class="s">今天的目标</div></div><span class="tag on">进行中</span></div>
+          <div class="li"><span class="check" style="color:var(--line-strong)">·</span><div class="txt" style="opacity:.5"><div class="t">双手合奏，慢速合拍</div></div></div>
+        </div>
+
+        <button class="btn btn-p btn-block" style="margin-top:14px">今日打卡</button>
+        <div class="hint" style="text-align:center">每天一小步，今天也记得。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 打卡日历 ============ -->
+  <div class="frame">
+    <div class="frame-bar"><div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div><span class="frame-title">打卡日历</span><span class="frame-tag">/ideal/[id]/calendar</span></div>
+    <div class="app">
+      <div class="topnav">
+        <div class="logo">云记录</div>
+        <div class="nav-links"><a>首页</a><a>记录</a><a class="on">理想</a><a>胶囊</a><a>我的</a></div>
+        <div class="avatar">鱼</div>
+      </div>
+      <div class="content">
+        <div class="page-head"><div class="t">打卡日历</div><div class="s">每一天的坚持，都看得见。</div></div>
+
+        <div class="cal">
+          <div class="cal-head"><span class="nav">‹</span><span>2026 年 10 月</span><span class="nav">›</span></div>
+          <div class="g7">
+            <span class="wd">一</span><span class="wd">二</span><span class="wd">三</span><span class="wd">四</span><span class="wd">五</span><span class="wd">六</span><span class="wd">日</span>
+            <span class="d off">28</span><span class="d off">29</span><span class="d off">30</span><span class="d">1</span><span class="d">2</span><span class="d">3</span><span class="d">4</span>
+            <span class="d done">5</span><span class="d done">6</span><span class="d done">7</span><span class="d done">8</span><span class="d">9</span><span class="d">10</span><span class="d today">11</span>
+            <span class="d">12</span><span class="d">13</span><span class="d">14</span><span class="d">15</span><span class="d">16</span><span class="d">17</span><span class="d">18</span>
+            <span class="d">19</span><span class="d">20</span><span class="d">21</span><span class="d">22</span><span class="d">23</span><span class="d">24</span><span class="d">25</span>
+            <span class="d">26</span><span class="d">27</span><span class="d">28</span><span class="d">29</span><span class="d">30</span><span class="d">31</span><span class="d off">1</span>
+          </div>
+          <div class="legend-cal"><span><i></i>已打卡</span><span>今天 · 记得打卡</span></div>
+        </div>
+
+        <div class="tiles" style="grid-template-columns:repeat(2,1fr)">
+          <div class="tile"><div class="v">4</div><div class="l">连续打卡（天）</div></div>
+          <div class="tile"><div class="v">7</div><div class="l">本月打卡（天）</div></div>
+        </div>
+
+        <div class="note">已连续打卡 4 天。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ AI 拆解 ============ -->
+  <div class="frame">
+    <div class="frame-bar"><div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div><span class="frame-title">AI 拆解任务</span><span class="frame-tag">SPLIT</span></div>
+    <div class="app">
+      <div class="topnav">
+        <div class="logo">云记录</div>
+        <div class="nav-links"><a>首页</a><a>记录</a><a class="on">理想</a><a>胶囊</a><a>我的</a></div>
+        <div class="avatar">鱼</div>
+      </div>
+      <div class="content">
+        <div class="page-head"><div class="t">AI 帮你拆解</div><div class="s">把大理想，变成每天的小步骤。</div></div>
+
+        <div class="ai-panel" style="margin-top:0">
+          <div class="ai-head"><span class="ai-tag">AI</span><span class="t">正在规划「学会弹一首完整的歌」</span><span class="cost">剩余 20 次</span></div>
+          <div class="ai-body">
+            拆解为 5 个小步骤：<br>
+            1. 认识五线谱与基础手型<br>
+            2. 练熟右手旋律<br>
+            3. 练熟左手和弦<span class="cursor"></span>
+          </div>
+          <div class="ai-actions">
+            <button class="btn btn-p sm">全部采纳</button>
+            <button class="btn btn-g sm">手动调整</button>
+          </div>
+        </div>
+
+        <div class="row-list" style="margin-top:14px">
+          <div class="li"><span class="num">1</span><div class="txt"><div class="t">认识五线谱与基础手型</div><div class="s">每天 20 分钟</div></div></div>
+          <div class="li"><span class="num">2</span><div class="txt"><div class="t">练熟右手旋律</div><div class="s">每天 20 分钟</div></div></div>
+          <div class="li"><span class="num">3</span><div class="txt"><div class="t">练熟左手和弦</div><div class="s">每天 20 分钟</div></div></div>
+          <div class="li" style="color:var(--ink-faint)"><span class="num">＋</span><div class="txt"><div class="t">手动添加一步</div></div></div>
+        </div>
+
+        <div class="hint" style="margin-top:10px">AI 不可用时，也可手动添加，不打断你的理想。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 理想完成态 ============ -->
+  <div class="frame">
+    <div class="frame-bar"><div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div><span class="frame-title">理想 · 完成</span><span class="frame-tag">DONE</span></div>
+    <div class="app">
+      <div class="topnav">
+        <div class="logo">云记录</div>
+        <div class="nav-links"><a>首页</a><a>记录</a><a class="on">理想</a><a>胶囊</a><a>我的</a></div>
+        <div class="avatar">鱼</div>
+      </div>
+      <div class="content" style="text-align:center;padding-top:40px">
+        <span class="tag on" style="font-size:11px">已完成</span>
+        <div class="page-head" style="margin-top:14px"><div class="t">这个理想，完成了</div></div>
+        <div class="note" style="text-align:center;border-left:none;padding-left:0">「学会弹一首完整的歌」已达成。</div>
+
+        <div class="ideal" style="margin-top:20px;text-align:left">
+          <div class="t">学会弹一首完整的歌</div>
+          <div class="bar"><i style="width:100%"></i></div>
+          <div class="meta"><span>12 / 12 步</span><span>连续 12 天</span></div>
+        </div>
+
+        <div class="badges" style="margin-top:18px">
+          <div class="badge"><div class="seal">成</div><div class="t">理想达成</div><div class="s">新徽章已解锁</div></div>
+          <div class="badge"><div class="seal">星</div><div class="t">坚持之星</div><div class="s">连续 12 天</div></div>
+        </div>
+
+        <button class="btn btn-p" style="margin-top:20px">分享这份喜悦</button>
+        <button class="btn btn-g" style="margin-left:8px;margin-top:20px">回到理想</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

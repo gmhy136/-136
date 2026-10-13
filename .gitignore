@@ -1,0 +1,8 @@
+# 编辑器 / 系统
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Claude Code 本地工具配置（非项目内容）
+.agents/
+skills-lock.json

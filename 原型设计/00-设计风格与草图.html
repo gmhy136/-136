@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>云记录 · UI 设计风格草图</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@500;600;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F1F7FB; --card:#FEFDFA; --card-2:#F2F5F8;
+    --ink:#333B43; --ink-soft:#6F7881; --ink-faint:#99A2AA;
+    --line:#DCE4EA; --line-strong:#C1CCD5;
+    --blue:#6A97B3; --blue-deep:#52768F; --blue-tint:#EDF3F7; --blue-line:#BED0DC;
+    --warm:#D6A068; --quiet:#79A4BD; --mint:#86B9A5; --sakura:#CE8FA9; --night:#9C8BBE; --paper-style:#B4C0C9;
+    --md-sunny:#D6A068; --md-calm:#79A4BD; --md-joy:#CE8FA9; --md-moon:#9C8BBE; --md-rain:#8AA3B4; --md-storm:#6C7D8A;
+    --font-serif:'Noto Serif SC','Songti SC','SimSun',serif;
+    --font-sans:'Noto Sans SC',system-ui,sans-serif;
+    --font-hand:'Ma Shan Zheng','Noto Serif SC',serif;
+    --noise:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+    --creases:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 1600' preserveAspectRatio='none'%3E%3Cg fill='none' stroke-linecap='round'%3E%3Cpath d='M-50 220 C 350 180 800 320 1250 240' stroke='%23FFFFFF' stroke-width='3' opacity='0.34'/%3E%3Cpath d='M-50 228 C 350 188 800 328 1250 248' stroke='%238FB4CC' stroke-width='2' opacity='0.11'/%3E%3Cpath d='M-50 640 C 400 690 780 580 1250 660' stroke='%23FFFFFF' stroke-width='2.5' opacity='0.28'/%3E%3Cpath d='M-50 647 C 400 697 780 587 1250 667' stroke='%238FB4CC' stroke-width='2' opacity='0.09'/%3E%3Cpath d='M-50 1020 C 400 1090 850 920 1250 1050' stroke='%238FB4CC' stroke-width='2' opacity='0.11'/%3E%3Cpath d='M-50 1027 C 400 1097 850 927 1250 1057' stroke='%23FFFFFF' stroke-width='3' opacity='0.3'/%3E%3Cpath d='M-50 1380 C 350 1320 700 1430 1250 1360' stroke='%23FFFFFF' stroke-width='2.5' opacity='0.26'/%3E%3Cpath d='M-50 1387 C 350 1327 700 1437 1250 1367' stroke='%238FB4CC' stroke-width='2' opacity='0.08'/%3E%3Cpath d='M80 1560 C 520 1010 920 500 1170 30' stroke='%23FFFFFF' stroke-width='2.5' opacity='0.16'/%3E%3Cpath d='M87 1560 C 527 1010 927 500 1177 30' stroke='%238FB4CC' stroke-width='2' opacity='0.05'/%3E%3C/g%3E%3C/svg%3E");
+    --stripes:repeating-linear-gradient(180deg, rgba(105,158,188,.03) 0px, rgba(105,158,188,.03) 1px, rgba(105,158,188,0) 1px, rgba(105,158,188,0) 5px);
+    --page-shade:linear-gradient(90deg, rgba(105,158,188,.02), rgba(105,158,188,0) 15%, rgba(105,158,188,0) 85%, rgba(105,158,188,.025));
+    --paper-texture:var(--page-shade), var(--creases), var(--stripes), var(--noise);
+    --shadow:0 1px 2px rgba(56,72,88,.07), 0 3px 10px rgba(56,72,88,.09);
+    --shadow-strong:0 1px 3px rgba(56,72,88,.09), 0 6px 20px rgba(56,72,88,.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:var(--font-sans);color:var(--ink);background-color:var(--paper);background-image:var(--paper-texture);background-size:100% 100%, 100% 100%, auto, auto;background-repeat:no-repeat, no-repeat, repeat, repeat;line-height:1.75;padding:40px 16px 120px}
+  .wrap{max-width:980px;margin:0 auto}
+
+  .hero{text-align:center;margin-bottom:16px}
+  .hero h1{font-family:var(--font-serif);font-size:34px;font-weight:600;color:var(--blue-deep);letter-spacing:.04em}
+  .hero .tag{display:inline-block;margin-top:14px;padding:5px 18px;font-size:12.5px;background:var(--card);border:1.5px solid var(--line-strong);border-radius:4px;color:var(--blue-deep);letter-spacing:.06em}
+  .hero p.sub{margin-top:16px;color:var(--ink-soft);font-size:13.5px}
+
+  section{margin-top:46px}
+  h2{font-family:var(--font-serif);font-size:20px;font-weight:600;color:var(--blue-deep);display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  h2 .no{font-family:var(--font-serif);font-weight:600;font-size:13px;color:#fff;background:var(--blue-deep);border-radius:3px;padding:2px 9px}
+  .desc{color:var(--ink-soft);font-size:13px;margin-bottom:18px}
+
+  .ideas{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .idea{background:var(--card);border:1.5px solid var(--line-strong);border-radius:4px;padding:22px 18px}
+  .idea .mark{width:34px;height:34px;border:1.5px solid var(--line-strong);border-radius:4px;display:flex;align-items:center;justify-content:center;font-family:var(--font-serif);font-size:17px;color:var(--blue-deep)}
+  .idea h3{font-family:var(--font-serif);font-size:15px;margin:12px 0 6px;color:var(--blue-deep);font-weight:600}
+  .idea p{font-size:12.5px;color:var(--ink-soft)}
+
+  .palette{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+  .swatch{border-radius:4px;overflow:hidden;border:1.5px solid var(--line-strong);background:var(--card)}
+  .swatch .c{height:64px}
+  .swatch .meta{padding:9px 10px 11px}
+  .swatch .meta b{display:block;font-size:12px;color:var(--ink)}
+  .swatch .meta span{font-size:11px;color:var(--ink-soft);font-family:var(--font-serif)}
+  .c.paper{background:var(--paper)} .c.card{background:var(--card);border-bottom:1px solid var(--line)}
+  .c.blue{background:var(--blue)} .c.bluedeep{background:var(--blue-deep)} .c.tint{background:var(--blue-tint)} .c.ink{background:var(--ink)}
+
+  .fonts{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .font{background:var(--card);border:1.5px solid var(--line-strong);border-radius:4px;padding:18px}
+  .font .sample{font-size:22px;margin-bottom:8px;color:var(--blue-deep)}
+  .font .name{font-size:12px;color:var(--ink-soft)}
+
+  .moods{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+  .mood{background:var(--card);border:1.5px solid var(--line-strong);border-radius:4px;padding:18px 8px;text-align:center}
+  .mood .dot{width:14px;height:14px;border-radius:50%;margin:0 auto}
+  .mood .nm{font-size:12.5px;margin-top:10px;color:var(--ink)}
+  .mood .wx{font-size:11px;color:var(--ink-soft)}
+
+  .styles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+  .stylecard{background:var(--card);border:1.5px solid var(--line-strong);border-left:4px solid var(--line-strong);border-radius:4px;padding:13px 14px 11px}
+  .stylecard .sname{font-family:var(--font-serif);font-size:13px;color:var(--ink);font-weight:600}
+  .stylecard .stext{font-size:12px;margin:5px 0 4px;color:var(--ink-soft);line-height:1.6}
+  .stylecard .skey{font-size:10.5px;opacity:.6;font-family:var(--font-serif)}
+  .sc-warm{border-left-color:var(--warm)} .sc-quiet{border-left-color:var(--quiet)} .sc-mint{border-left-color:var(--mint)}
+  .sc-sakura{border-left-color:var(--sakura)} .sc-night{border-left-color:var(--night)} .sc-paper{border-left-color:var(--paper-style)}
+
+  .comps{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .comp{background:var(--card);border:1.5px solid var(--line-strong);border-radius:4px;padding:22px}
+  .comp h3{font-family:var(--font-serif);font-size:14px;color:var(--blue-deep);margin-bottom:16px;font-weight:600}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+  .btn{font-size:13.5px;border-radius:4px;padding:9px 18px;cursor:pointer;border:1.5px solid var(--blue);font-weight:500;letter-spacing:.03em}
+  .btn-primary{background:var(--blue);color:#fff}
+  .btn-ghost{background:var(--card);color:var(--blue-deep);border-color:var(--line-strong)}
+  .btn-soft{background:var(--blue-tint);color:var(--blue-deep);border-color:var(--blue-line)}
+  .input{width:100%;font-size:13.5px;border:1.5px solid var(--line-strong);border-radius:4px;padding:10px 14px;background:var(--card);color:var(--ink);outline:none}
+  .chip{font-size:12px;padding:4px 12px;border-radius:3px;border:1.5px solid var(--blue-line);background:var(--card);color:var(--blue-deep)}
+  .chip.on{background:var(--blue);border-color:var(--blue);color:#fff}
+  .tag-ai{font-size:11px;padding:2px 9px;border-radius:3px;background:var(--blue-tint);color:var(--blue-deep);font-weight:600;display:inline-block;border:1.5px solid var(--blue-line);letter-spacing:.05em}
+
+  .demo{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+  .demo-card{background:var(--card-2);border:1.5px solid var(--line-strong);border-radius:4px;padding:24px 18px}
+  .demo-card h3{font-family:var(--font-serif);font-size:14px;color:var(--blue-deep);margin-bottom:16px;text-align:center;font-weight:600}
+
+  .record{background:var(--card);border:1.5px solid var(--line-strong);border-left:3px solid var(--quiet);border-radius:4px;padding:18px 16px 14px}
+  .record .head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .record .mood{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;color:var(--ink)}
+  .record .mood .dot{width:9px;height:9px;border-radius:50%}
+  .record .time{font-size:11px;color:var(--ink-faint)}
+  .record p{font-size:13px;line-height:1.8;color:var(--ink)}
+  .record .foot{display:flex;align-items:center;justify-content:space-between;margin-top:12px}
+
+  .ideal{background:var(--card);border:1.5px solid var(--line-strong);border-radius:4px;padding:16px}
+  .ideal .title{font-family:var(--font-serif);font-size:13.5px;font-weight:600;color:var(--blue-deep)}
+  .ideal .bar{height:6px;background:var(--blue-tint);border-radius:99px;margin:12px 0 8px;overflow:hidden}
+  .ideal .bar i{display:block;height:100%;width:58%;background:var(--blue);border-radius:99px}
+  .ideal .meta{font-size:11.5px;color:var(--ink-soft);display:flex;justify-content:space-between}
+  .checkbtn{margin-top:14px;width:100%;font-size:13px;border:1.5px solid var(--blue);border-radius:4px;background:var(--blue);color:#fff;padding:9px;font-weight:500;cursor:pointer;letter-spacing:.03em}
+
+  .envelope{background:var(--card);border:1.5px solid var(--line-strong);border-radius:4px;padding:24px 16px;text-align:center}
+  .envelope .flap{width:0;height:0;border-left:52px solid transparent;border-right:52px solid transparent;border-top:34px solid #D9E1E6;margin:0 auto 12px}
+  .envelope .lock{font-family:var(--font-serif);font-size:13px;font-weight:600;color:var(--ink-soft);letter-spacing:.06em}
+  .envelope .et{font-family:var(--font-serif);font-size:13.5px;font-weight:600;color:var(--blue-deep);margin-top:8px}
+  .envelope .es{font-size:11.5px;color:var(--ink-soft);margin-top:4px}
+
+  .nav{display:flex;align-items:center;justify-content:space-around;background:var(--card);border:1.5px solid var(--line-strong);border-radius:4px;padding:14px 8px}
+  .nav .ni{text-align:center;font-size:11.5px;color:var(--ink-soft);cursor:pointer;letter-spacing:.04em}
+  .nav .ni.on{color:var(--blue-deep);font-weight:600}
+
+  .ip{background:var(--card);border:1.5px solid var(--line-strong);border-radius:4px;padding:24px 22px}
+  .ip .ip-text{margin-top:12px;font-size:13px;color:var(--ink-soft);line-height:1.9}
+
+  .foot-note{margin-top:60px;text-align:center;font-size:12px;color:var(--ink-soft);letter-spacing:.04em}
+
+  .idea,.swatch,.font,.mood,.stylecard,.comp,.demo-card,.record,.ideal,.envelope,.nav,.ip{box-shadow:var(--shadow)}
+
+  @media(max-width:760px){
+    .ideas,.palette,.fonts,.styles,.demo{grid-template-columns:1fr 1fr}
+    .moods{grid-template-columns:repeat(3,1fr)}
+    .comps{grid-template-columns:1fr}
+    .palette{grid-template-columns:repeat(3,1fr)}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <h1>云记录</h1>
+    <div class="tag">设计风格草图 · 文学编辑风 · 纸上书页 · 克制留白</div>
+    <p class="sub">淡蓝纸底 + 纸纹条纹与褶皱，像一本安静的书 —— 融合《天蓝色的彼岸》的温柔彼岸意象与《紫罗兰永恒花园》的写信美学</p>
+  </header>
+
+  <section>
+    <h2><span class="no">1</span>设计理念 · 三个意象来源</h2>
+    <p class="desc">把「记录」做成一张写给自己的信，把界面做成一本安静的书。</p>
+    <div class="ideas">
+      <div class="idea">
+        <div class="mark">岸</div>
+        <h3>天蓝色的彼岸</h3>
+        <p>天空与海的淡蓝，安静、温柔。记录是通往「彼岸」的旅程。</p>
+      </div>
+      <div class="idea">
+        <div class="mark">信</div>
+        <h3>紫罗兰永恒花园</h3>
+        <p>低饱和、克制的蓝；「代写书信」主题与时间胶囊天然契合，优雅不张扬。</p>
+      </div>
+      <div class="idea">
+        <div class="mark">书</div>
+        <h3>纸质书质感</h3>
+        <p>淡蓝纸底、纸纹条纹与褶皱、硬朗细线边框、大量留白，像翻一本安静的书。</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">2</span>色彩系统</h2>
+    <p class="desc">淡蓝纸为底，附纸纹条纹与褶皱；正文用接近书本的墨色。</p>
+    <div class="palette">
+      <div class="swatch"><div class="c paper"></div><div class="meta"><b>淡蓝纸 · 页面底</b><span>#F1F7FB</span></div></div>
+      <div class="swatch"><div class="c card"></div><div class="meta"><b>纸白 · 卡片</b><span>#FEFDFA</span></div></div>
+      <div class="swatch"><div class="c blue"></div><div class="meta"><b>淡蓝 · 强调</b><span>#6A97B3</span></div></div>
+      <div class="swatch"><div class="c bluedeep"></div><div class="meta"><b>深蓝 · 标题</b><span>#52768F</span></div></div>
+      <div class="swatch"><div class="c tint"></div><div class="meta"><b>淡蓝底 · 选中</b><span>#EAF0F4</span></div></div>
+      <div class="swatch"><div class="c ink"></div><div class="meta"><b>墨色 · 正文</b><span>#333B43</span></div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">3</span>字体</h2>
+    <p class="desc">标题用衬线宋体，正文用无衬线，信件 / 故事用手写体点缀，数字用衬线。</p>
+    <div class="fonts">
+      <div class="font"><div class="sample" style="font-family:var(--font-serif)">记录今天的心情</div><div class="name">标题 / 数字 · Noto Serif SC（衬线）</div></div>
+      <div class="font"><div class="sample" style="font-family:var(--font-sans)">下午好，小鱼</div><div class="name">正文 · Noto Sans SC（无衬线）</div></div>
+      <div class="font"><div class="sample" style="font-family:var(--font-hand)">你走得比想象中远</div><div class="name">信件 / 故事 · 马善政楷体</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">4</span>心情 · 天气</h2>
+    <p class="desc">心情用「天气」表达，以一枚小圆点标识，为二期「心情天气月报」预留。</p>
+    <div class="moods">
+      <div class="mood"><div class="dot" style="background:var(--md-sunny)"></div><div class="nm">开心</div><div class="wx">晴</div></div>
+      <div class="mood"><div class="dot" style="background:var(--md-calm)"></div><div class="nm">平静</div><div class="wx">多云</div></div>
+      <div class="mood"><div class="dot" style="background:var(--md-joy)"></div><div class="nm">小确幸</div><div class="wx">彩虹</div></div>
+      <div class="mood"><div class="dot" style="background:var(--md-moon)"></div><div class="nm">有点累</div><div class="wx">月夜</div></div>
+      <div class="mood"><div class="dot" style="background:var(--md-rain)"></div><div class="nm">emo</div><div class="wx">雨</div></div>
+      <div class="mood"><div class="dot" style="background:var(--md-storm)"></div><div class="nm">焦虑</div><div class="wx">雷雨</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">5</span>记录卡 · 6 种风格（左侧细色条）</h2>
+    <p class="desc">卡片统一纸白，仅左侧一条细色条标识风格，克制不花。</p>
+    <div class="styles">
+      <div class="stylecard sc-warm"><div class="sname">暖阳橙</div><div class="stext">今天的阳光，晒得人懒洋洋的。</div><div class="skey">warm-sunny</div></div>
+      <div class="stylecard sc-quiet"><div class="sname">静谧蓝</div><div class="stext">安静下来的下午，只有风声。</div><div class="skey">quiet-blue</div></div>
+      <div class="stylecard sc-mint"><div class="sname">薄荷绿</div><div class="stext">新发的芽，是嫩绿嫩绿的。</div><div class="skey">mint-fresh</div></div>
+      <div class="stylecard sc-sakura"><div class="sname">樱花粉</div><div class="stext">路过一棵开花的树，风一吹。</div><div class="skey">sakura-pink</div></div>
+      <div class="stylecard sc-night"><div class="sname">夜空紫</div><div class="stext">夜很静，星星都很亮。</div><div class="skey">night-purple</div></div>
+      <div class="stylecard sc-paper"><div class="sname">素白</div><div class="stext">简简单单，记下一件事就好。</div><div class="skey">paper-white</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">6</span>基础组件</h2>
+    <p class="desc">硬朗的细线边框、小圆角、扁平配色、衬线标题。</p>
+    <div class="comps">
+      <div class="comp">
+        <h3>按钮 / 标签</h3>
+        <div class="row">
+          <button class="btn btn-primary">保存卡片</button>
+          <button class="btn btn-ghost">丢弃</button>
+          <button class="btn btn-soft">今日打卡</button>
+        </div>
+        <div class="row">
+          <span class="chip on">AI 扩写</span>
+          <span class="chip">AI 风格推荐</span>
+          <span class="tag-ai">AI</span>
+        </div>
+      </div>
+      <div class="comp">
+        <h3>输入 / 空状态</h3>
+        <input class="input" placeholder="写点什么，今天过得怎么样？">
+        <div class="row" style="margin-top:12px">
+          <span style="font-size:12px;color:var(--ink-soft)">这里还空着，写第一张卡吧。</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">7</span>三个核心页面 · 样例</h2>
+    <p class="desc">记录卡、理想卡、时间胶囊 —— 三种核心卡片的最终形态。</p>
+    <div class="demo">
+      <div class="demo-card">
+        <h3>记录卡</h3>
+        <div class="record">
+          <div class="head">
+            <span class="mood"><span class="dot" style="background:var(--md-sunny)"></span>开心</span>
+            <span class="time">10月11日 · 16:24</span>
+          </div>
+          <p>下午沿着河边走了一圈，风很轻，天特别蓝。忽然觉得，慢一点也没关系。</p>
+          <div class="foot"><span class="tag-ai">AI 润色</span><span style="font-size:11.5px;color:var(--ink-soft)">静谧蓝</span></div>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <h3>理想卡</h3>
+        <div class="ideal">
+          <div class="title">学会弹一首完整的歌</div>
+          <div class="bar"><i></i></div>
+          <div class="meta"><span>已完成 7 / 12 步</span><span>连续 4 天</span></div>
+          <button class="checkbtn">今日打卡</button>
+        </div>
+      </div>
+
+      <div class="demo-card">
+        <h3>时间胶囊</h3>
+        <div class="envelope">
+          <div class="flap"></div>
+          <div class="lock">密封</div>
+          <div class="et">给 2027 年的自己</div>
+          <div class="es">将于 2027-01-01 开启</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="no">8</span>导航 &amp; AI 助手</h2>
+    <p class="desc">顶部导航以纯文字呈现；AI 助手承担润色、扩写、拆解与空状态引导。</p>
+    <div class="nav">
+      <div class="ni on">首页</div>
+      <div class="ni">记录</div>
+      <div class="ni">理想</div>
+      <div class="ni">胶囊</div>
+      <div class="ni">我的</div>
+    </div>
+    <div class="ip" style="margin-top:18px">
+      <span class="tag-ai">AI</span>
+      <div class="ip-text">云记录内置 AI 助手：润色、扩写、拆解、每日一句。<br>它不替你生活，只在你需要时搭把手。</div>
+    </div>
+  </section>
+
+  <div class="foot-note">云记录 · UI 设计风格草图 v0.3 —— 文学编辑风 · 纸上书页 · 克制留白</div>
+
+</div>
+</body>
+</html>

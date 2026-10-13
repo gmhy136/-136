@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>云记录 · 记录卡原型</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@500;600;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="prototype.css">
+</head>
+<body>
+
+<div class="doc-head">
+  <div class="kicker">云记录 · UI 原型 / 02</div>
+  <h1>记录卡 · 核心流程</h1>
+  <div class="sub">时间线 · 列表 · 新建 / 编辑 · AI 扩写 · AI 风格推荐 · 图片上传 —— 记录像写一张信</div>
+  <div class="legend"><span>心情选择</span><span>AI 扩写（SSE 流式）</span><span>6 种风格</span><span>图片 1-3 张</span></div>
+</div>
+
+<div class="grid">
+
+  <!-- ============ 首页时间线 ============ -->
+  <div class="frame">
+    <div class="frame-bar"><div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div><span class="frame-title">首页 · 时间线</span><span class="frame-tag">/home</span></div>
+    <div class="app">
+      <div class="topnav">
+        <div class="logo">云记录</div>
+        <div class="nav-links"><a class="on">首页</a><a>记录</a><a>理想</a><a>胶囊</a><a>我的</a></div>
+        <div class="avatar">鱼</div>
+      </div>
+      <div class="content">
+        <div class="page-head"><div class="t">下午好，小鱼</div><div class="s">今天想记下点什么？</div></div>
+
+        <div class="note"><b>今日一句</b>　你走过的路，早已留下痕迹。</div>
+
+        <div class="sect-t">最近记录</div>
+        <div class="rec st-quiet">
+          <div class="top"><span class="mood"><i class="mdot md-calm"></i>平静</span><span class="time">今天 16:24</span></div>
+          <p>下午沿着河边走了一圈，风很轻，天特别蓝。忽然觉得，慢一点也没关系。</p>
+          <div class="imgs"><span>图 1</span><span>图 2</span></div>
+          <div class="foot"><span class="tag ai">AI 润色</span><span class="time">静谧蓝</span></div>
+        </div>
+        <div class="rec st-warm">
+          <div class="top"><span class="mood"><i class="mdot md-sunny"></i>开心</span><span class="time">昨天</span></div>
+          <p>第一次跑完 5 公里，虽然很慢，但坚持下来了。</p>
+          <div class="foot"><span class="tag">原创</span><span class="time">暖阳橙</span></div>
+        </div>
+        <button class="btn btn-p btn-block">写一张新卡</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 记录卡列表 ============ -->
+  <div class="frame">
+    <div class="frame-bar"><div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div><span class="frame-title">记录卡列表</span><span class="frame-tag">/record</span></div>
+    <div class="app">
+      <div class="topnav">
+        <div class="logo">云记录</div>
+        <div class="nav-links"><a>首页</a><a class="on">记录</a><a>理想</a><a>胶囊</a><a>我的</a></div>
+        <div class="avatar">鱼</div>
+      </div>
+      <div class="content">
+        <div class="page-head"><div class="t">全部记录</div><div class="s">12 张卡片 · 按时间倒序</div></div>
+
+        <div class="rec st-night">
+          <div class="top"><span class="mood"><i class="mdot md-moon"></i>有点累</span><span class="time">10月10日</span></div>
+          <p>加班到很晚，抬头看到月亮很圆。原来它也在陪着我。</p>
+          <div class="foot"><span class="tag ai">AI 润色</span><span class="time">夜空紫</span></div>
+        </div>
+        <div class="rec st-sakura">
+          <div class="top"><span class="mood"><i class="mdot md-joy"></i>小确幸</span><span class="time">10月8日</span></div>
+          <p>路过一家花店，老板娘送了我一枝开得正好的花。</p>
+          <div class="foot"><span class="tag">原创</span><span class="time">樱花粉</span></div>
+        </div>
+        <div class="rec st-mint">
+          <div class="top"><span class="mood"><i class="mdot md-calm"></i>平静</span><span class="time">10月6日</span></div>
+          <p>阳台的多肉长出了新芽，小小的，绿绿的。</p>
+          <div class="foot"><span class="tag ai">AI 扩写</span><span class="time">薄荷绿</span></div>
+        </div>
+        <div class="row-list">
+          <div class="li"><div class="txt"><div class="t">更早的记录</div><div class="s">点击加载更多</div></div><span class="tag ghost">加载更多</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 新建记录卡 ============ -->
+  <div class="frame">
+    <div class="frame-bar"><div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div><span class="frame-title">新建记录卡</span><span class="frame-tag">/record/new</span></div>
+    <div class="app">
+      <div class="topnav">
+        <div class="logo">云记录</div>
+        <div class="nav-links"><a>首页</a><a class="on">记录</a><a>理想</a><a>胶囊</a><a>我的</a></div>
+        <div class="avatar">鱼</div>
+      </div>
+      <div class="content">
+        <div class="page-head"><div class="t">写一张新卡</div><div class="s">不用写得多好，写下来就好。</div></div>
+
+        <label class="f">今天的心情</label>
+        <div class="moodpick">
+          <div class="m on"><i class="mdot md-sunny"></i>开心</div>
+          <div class="m"><i class="mdot md-calm"></i>平静</div>
+          <div class="m"><i class="mdot md-joy"></i>小确幸</div>
+          <div class="m"><i class="mdot md-moon"></i>有点累</div>
+          <div class="m"><i class="mdot md-rain"></i>emo</div>
+          <div class="m"><i class="mdot md-storm"></i>焦虑</div>
+        </div>
+
+        <label class="f">正文</label>
+        <textarea class="inp" placeholder="写点什么，今天过得怎么样？"></textarea>
+        <div class="hint">也可以让 AI 帮你写。</div>
+
+        <div class="row-list" style="margin-top:12px">
+          <div class="li"><div class="txt"><div class="t">AI 扩写</div><div class="s">让这句话更自然</div></div><span class="tag ai">可用 20 次</span></div>
+          <div class="li"><div class="txt"><div class="t">AI 风格推荐</div><div class="s">按心情挑一个卡片风格</div></div><span class="tag">智能</span></div>
+        </div>
+
+        <label class="f">配图（最多 3 张）</label>
+        <div style="display:flex;gap:6px;border:1.5px solid var(--line-strong);background:var(--card);border-radius:4px;padding:12px">
+          <span style="width:52px;height:52px;border-radius:4px;border:1px solid var(--line);background:var(--mist);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--ink-faint)">图 1</span>
+          <span style="width:52px;height:52px;border-radius:4px;border:1.5px solid var(--line-strong);background:var(--card);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--blue-deep)">＋</span>
+        </div>
+
+        <button class="btn btn-p btn-block" style="margin-top:16px">保存卡片</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ AI 扩写 ============ -->
+  <div class="frame">
+    <div class="frame-bar"><div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div><span class="frame-title">AI 扩写（流式）</span><span class="frame-tag">SSE</span></div>
+    <div class="app">
+      <div class="topnav">
+        <div class="logo">云记录</div>
+        <div class="nav-links"><a>首页</a><a class="on">记录</a><a>理想</a><a>胶囊</a><a>我的</a></div>
+        <div class="avatar">鱼</div>
+      </div>
+      <div class="content">
+        <div class="page-head"><div class="t">写一张新卡</div><div class="s">让 AI 帮你把句子理顺。</div></div>
+
+        <label class="f">你的原文</label>
+        <div class="ai-body" style="background:var(--card);border:1.5px solid var(--line-strong)">今天加班很晚，有点累。</div>
+
+        <div class="ai-panel">
+          <div class="ai-head">
+            <span class="ai-tag">AI</span>
+            <span class="t">正在润色</span>
+            <span class="cost">剩余 19 次</span>
+          </div>
+          <div class="ai-body">
+            今天加班到很晚，走出写字楼时，夜色已经很深了。抬头看见月亮又大又圆，忽然觉得，原来它一直都在安静地陪着我。累，但也有一点被照亮的温柔<span class="cursor"></span>
+          </div>
+          <div class="ai-actions">
+            <button class="btn btn-p sm">采纳</button>
+            <button class="btn btn-g sm">丢弃</button>
+            <button class="btn btn-s sm">再写一次</button>
+          </div>
+        </div>
+
+        <div class="note"><b>AI</b>　保留你的语气，只润色字句。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ AI 风格推荐 ============ -->
+  <div class="frame">
+    <div class="frame-bar"><div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div><span class="frame-title">AI 风格推荐</span><span class="frame-tag">STYLE</span></div>
+    <div class="app">
+      <div class="topnav">
+        <div class="logo">云记录</div>
+        <div class="nav-links"><a>首页</a><a class="on">记录</a><a>理想</a><a>胶囊</a><a>我的</a></div>
+        <div class="avatar">鱼</div>
+      </div>
+      <div class="content">
+        <div class="page-head"><div class="t">挑一个卡片风格</div><div class="s">根据你的心情推荐，也可自己选。</div></div>
+
+        <div class="ai-panel" style="margin-top:0">
+          <div class="ai-head">
+            <span class="ai-tag">AI</span>
+            <span class="t">推荐</span>
+            <span class="cost">心情：平静</span>
+          </div>
+          <div class="ai-body" style="display:flex;align-items:center;gap:10px">
+            <span style="width:14px;height:34px;border-radius:2px;background:var(--quiet);flex:none;display:inline-block"></span>
+            <span>静谧蓝 —— 安静的日子，配安静的蓝。</span>
+          </div>
+        </div>
+
+        <label class="f">全部风格</label>
+        <div class="styles-grid">
+          <div class="st"><span class="bar warm"></span><div class="t">暖阳橙</div></div>
+          <div class="st sel"><span class="bar quiet"></span><div class="t">静谧蓝</div></div>
+          <div class="st"><span class="bar mint"></span><div class="t">薄荷绿</div></div>
+          <div class="st"><span class="bar sakura"></span><div class="t">樱花粉</div></div>
+          <div class="st"><span class="bar night"></span><div class="t">夜空紫</div></div>
+          <div class="st"><span class="bar paper"></span><div class="t">素白</div></div>
+        </div>
+
+        <div class="rec st-quiet" style="margin-top:16px">
+          <div class="top"><span class="mood"><i class="mdot md-calm"></i>平静</span><span class="time">预览</span></div>
+          <p>安静下来的下午，只有风声和翻书的声音。</p>
+          <div class="foot"><span class="tag ai">静谧蓝</span><span class="time">效果预览</span></div>
+        </div>
+
+        <button class="btn btn-p btn-block">应用这个风格</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 编辑记录卡 ============ -->
+  <div class="frame">
+    <div class="frame-bar"><div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div><span class="frame-title">编辑记录卡</span><span class="frame-tag">/record/[id]/edit</span></div>
+    <div class="app">
+      <div class="topnav">
+        <div class="logo">云记录</div>
+        <div class="nav-links"><a>首页</a><a class="on">记录</a><a>理想</a><a>胶囊</a><a>我的</a></div>
+        <div class="avatar">鱼</div>
+      </div>
+      <div class="content">
+        <div class="page-head"><div class="t">编辑卡片</div><div class="s">把它改得更贴近此刻。</div></div>
+
+        <label class="f">今天的心情</label>
+        <div class="moodpick">
+          <div class="m"><i class="mdot md-sunny"></i>开心</div>
+          <div class="m on"><i class="mdot md-calm"></i>平静</div>
+          <div class="m"><i class="mdot md-joy"></i>小确幸</div>
+          <div class="m"><i class="mdot md-moon"></i>有点累</div>
+          <div class="m"><i class="mdot md-rain"></i>emo</div>
+          <div class="m"><i class="mdot md-storm"></i>焦虑</div>
+        </div>
+
+        <label class="f">正文</label>
+        <textarea class="inp">下午沿着河边走了一圈，风很轻，天特别蓝。忽然觉得，慢一点也没关系。</textarea>
+
+        <label class="f">配图</label>
+        <div style="display:flex;gap:6px">
+          <span style="width:52px;height:52px;border-radius:4px;border:1px solid var(--line);background:var(--mist);display:flex;align-items:center;justify-content:center;font-size:10px;color:var(--ink-faint)">图 1</span>
+          <span style="width:52px;height:52px;border-radius:4px;border:1.5px solid var(--line-strong);background:var(--card);display:flex;align-items:center;justify-content:center;font-size:20px;color:var(--blue-deep)">＋</span>
+        </div>
+
+        <div style="display:flex;gap:8px;margin-top:16px">
+          <button class="btn btn-p" style="flex:1">保存修改</button>
+          <button class="btn btn-g">删除</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>云记录 · 时间胶囊原型</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@500;600;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="prototype.css">
+</head>
+<body>
+
+<div class="doc-head">
+  <div class="kicker">云记录 · UI 原型 / 04</div>
+  <h1>时间胶囊</h1>
+  <div class="sub">写信给未来的自己 · 胶囊列表 · 锁定 / 开启 · 到期提醒 —— 替代漂流瓶，一个人也能用</div>
+  <div class="legend"><span>写给未来</span><span>开启日期</span><span>到期提醒</span><span>情感价值</span></div>
+</div>
+
+<div class="grid">
+
+  <!-- ============ 胶囊列表 ============ -->
+  <div class="frame">
+    <div class="frame-bar"><div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div><span class="frame-title">胶囊列表</span><span class="frame-tag">/capsule</span></div>
+    <div class="app">
+      <div class="topnav">
+        <div class="logo">云记录</div>
+        <div class="nav-links"><a>首页</a><a>记录</a><a>理想</a><a class="on">胶囊</a><a>我的</a></div>
+        <div class="avatar">鱼</div>
+      </div>
+      <div class="content">
+        <div class="page-head"><div class="t">时间胶囊</div><div class="s">写给未来的自己，一句一句，都在时间里等你。</div></div>
+
+        <div class="sect-t">等待开启 · 3</div>
+        <div class="env">
+          <div class="flap"></div>
+          <div class="lock">密封</div>
+          <div class="t">给 2027 年的自己</div>
+          <div class="s">2027-01-01 开启 · 还剩 82 天</div>
+        </div>
+        <div class="env">
+          <div class="flap"></div>
+          <div class="lock">密封</div>
+          <div class="t">毕业那天再打开</div>
+          <div class="s">2027-06-30 开启 · 还剩 262 天</div>
+        </div>
+
+        <div class="sect-t">已经开启 · 1</div>
+        <div class="env opened">
+          <div class="lock">已开启</div>
+          <div class="t">给三个月前的自己</div>
+          <div class="s">已于 2026-10-01 开启</div>
+        </div>
+
+        <button class="btn btn-p btn-block">写一封信给未来</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 写信 ============ -->
+  <div class="frame">
+    <div class="frame-bar"><div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div><span class="frame-title">写一封信</span><span class="frame-tag">/capsule/new</span></div>
+    <div class="app">
+      <div class="topnav">
+        <div class="logo">云记录</div>
+        <div class="nav-links"><a>首页</a><a>记录</a><a>理想</a><a class="on">胶囊</a><a>我的</a></div>
+        <div class="avatar">鱼</div>
+      </div>
+      <div class="content">
+        <div class="page-head"><div class="t">写一封信给未来的自己</div><div class="s">想对那时的自己，说点什么？</div></div>
+
+        <label class="f">标题（可选）</label>
+        <input class="inp" placeholder="比如：给 2027 年的自己">
+
+        <label class="f">信的内容</label>
+        <textarea class="inp" placeholder="亲爱的自己：&#10;&#10;不知道现在的你过得好不好……"></textarea>
+
+        <label class="f">开启日期</label>
+        <input class="inp" value="2027-01-01">
+        <div class="hint">开启日期最早为明天，到期后我们会提醒你。</div>
+
+        <div class="notice" style="margin-top:14px">
+          <span class="seal">密</span>
+          <span>这封信会被好好保管，在开启日前，谁也看不到（包括你自己）。</span>
+        </div>
+
+        <button class="btn btn-p btn-block">封存这封信</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 锁定态 ============ -->
+  <div class="frame">
+    <div class="frame-bar"><div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div><span class="frame-title">胶囊 · 锁定态</span><span class="frame-tag">未到期</span></div>
+    <div class="app">
+      <div class="topnav">
+        <div class="logo">云记录</div>
+        <div class="nav-links"><a>首页</a><a>记录</a><a>理想</a><a class="on">胶囊</a><a>我的</a></div>
+        <div class="avatar">鱼</div>
+      </div>
+      <div class="content" style="text-align:center;padding-top:36px">
+        <div class="env" style="max-width:240px;margin:0 auto">
+          <div class="flap"></div>
+          <div class="lock">密封</div>
+          <div class="t">给 2027 年的自己</div>
+        </div>
+        <div class="page-head" style="margin-top:24px"><div class="t">这封信还在时间里旅行</div></div>
+        <div class="s" style="color:var(--ink-soft);font-size:12px">将于 <b style="color:var(--blue-deep)">2027-01-01</b> 开启</div>
+
+        <div class="tiles" style="grid-template-columns:repeat(3,1fr);max-width:240px;margin:20px auto 0">
+          <div class="tile"><div class="v">82</div><div class="l">天</div></div>
+          <div class="tile"><div class="v">11</div><div class="l">时</div></div>
+          <div class="tile"><div class="v">26</div><div class="l">分</div></div>
+        </div>
+
+        <div class="note" style="text-align:center;border-left:none;padding-left:0;margin-top:24px">留给未来的自己，先不打开。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 已开启态 ============ -->
+  <div class="frame">
+    <div class="frame-bar"><div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div><span class="frame-title">胶囊 · 已开启</span><span class="frame-tag">读信</span></div>
+    <div class="app">
+      <div class="topnav">
+        <div class="logo">云记录</div>
+        <div class="nav-links"><a>首页</a><a>记录</a><a>理想</a><a class="on">胶囊</a><a>我的</a></div>
+        <div class="avatar">鱼</div>
+      </div>
+      <div class="content">
+        <div class="page-head" style="text-align:center"><div class="t">你的信到了</div><div class="s">来自 2026 年 7 月 1 日的你</div></div>
+
+        <div style="background:var(--card);border:1.5px solid var(--line-strong);border-left:3px solid var(--warm);border-radius:4px;padding:18px 16px;font-family:'Ma Shan Zheng','Noto Serif SC';font-size:14.5px;line-height:1.9;color:var(--ink);box-shadow:var(--shadow)">
+          亲爱的自己：<br><br>
+          不知道三个月后的你，是不是还在为那件事焦虑。如果是，我想告诉你——你后来做得很好，真的。<br><br>
+          请继续相信那个慢慢来的自己。
+        </div>
+
+        <div class="note">你始终比想象中更笃定。</div>
+
+        <button class="btn btn-g btn-block" style="margin-top:16px">再写一封给未来</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 到期提醒 ============ -->
+  <div class="frame">
+    <div class="frame-bar"><div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div><span class="frame-title">到期提醒</span><span class="frame-tag">通知</span></div>
+    <div class="app">
+      <div class="topnav">
+        <div class="logo">云记录</div>
+        <div class="nav-links"><a>首页</a><a>记录</a><a>理想</a><a class="on">胶囊</a><a>我的</a></div>
+        <div class="avatar">鱼</div>
+      </div>
+      <div class="content">
+        <div class="page-head"><div class="t">通知</div><div class="s">这里有几条新消息。</div></div>
+
+        <div class="notice">
+          <span class="seal">信</span>
+          <div style="flex:1"><b>你有一封信到了</b><div style="font-size:10.5px;margin-top:2px">「给三个月前的自己」今天可以开启了</div></div>
+          <span class="tag on">去开启</span>
+        </div>
+
+        <div class="notice">
+          <span class="seal">句</span>
+          <div style="flex:1"><b>今日一句</b><div style="font-size:10.5px;margin-top:2px">你走过的路，早已留下痕迹。</div></div>
+        </div>
+
+        <div class="row-list" style="margin-top:16px">
+          <div class="li"><div class="txt"><div class="t">今日打卡提醒</div><div class="s">「学会弹一首完整的歌」还没打卡</div></div><span class="tag ghost">去打卡</span></div>
+          <div class="li" style="opacity:.6"><div class="txt"><div class="t">邮件提醒（二期）</div><div class="s">开启日当天发邮件给你</div></div></div>
+        </div>
+
+        <div class="hint" style="margin-top:12px;text-align:center">不做已读，不做在线。</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>云记录 · 亮点扩展原型</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&family=Noto+Serif+SC:wght@500;600;700&family=Ma+Shan+Zheng&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="prototype.css">
+</head>
+<body>
+
+<div class="doc-head">
+  <div class="kicker">云记录 · UI 原型 / 05</div>
+  <h1>亮点扩展功能 · 二 / 三期预览</h1>
+  <div class="sub">心情天气月报 · 成长时间线 · 成就徽章 · 年度故事 · 今日一句 · 种子信箱 · 话题广场</div>
+  <div class="legend"><span>心情可视化</span><span>徽章激励</span><span>慢社交</span><span>传播性亮点</span></div>
+</div>
+
+<div class="grid">
+
+  <!-- ============ 心情天气月报 ============ -->
+  <div class="frame">
+    <div class="frame-bar"><div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div><span class="frame-title">心情天气月报</span><span class="frame-tag">二期</span></div>
+    <div class="app">
+      <div class="topnav">
+        <div class="logo">云记录</div>
+        <div class="nav-links"><a>首页</a><a>记录</a><a>理想</a><a>胶囊</a><a class="on">我的</a></div>
+        <div class="avatar">鱼</div>
+      </div>
+      <div class="content">
+        <div class="page-head"><div class="t">10 月的心情天气</div><div class="s">把每一天的心情，画成一张天气图。</div></div>
+
+        <div class="cal" style="padding:14px">
+          <div class="cal-head"><span>10 月 · 2026</span><span class="tag ai">月报</span></div>
+          <div class="wx-tiles">
+            <span class="wx wd">一</span><span class="wx wd">二</span><span class="wx wd">三</span><span class="wx wd">四</span><span class="wx wd">五</span><span class="wx wd">六</span><span class="wx wd">日</span>
+            <span class="wx blank"></span><span class="wx blank"></span><span class="wx blank"></span><span class="wx"><i class="mdot md-calm"></i></span><span class="wx"><i class="mdot md-sunny"></i></span><span class="wx"><i class="mdot md-sunny"></i></span><span class="wx"><i class="mdot md-joy"></i></span>
+            <span class="wx"><i class="mdot md-calm"></i></span><span class="wx"><i class="mdot md-rain"></i></span><span class="wx"><i class="mdot md-rain"></i></span><span class="wx"><i class="mdot md-sunny"></i></span><span class="wx"><i class="mdot md-calm"></i></span><span class="wx"><i class="mdot md-calm"></i></span><span class="wx"><i class="mdot md-sunny"></i></span>
+            <span class="wx"><i class="mdot md-joy"></i></span><span class="wx"><i class="mdot md-sunny"></i></span><span class="wx"><i class="mdot md-rain"></i></span><span class="wx"><i class="mdot md-calm"></i></span><span class="wx"><i class="mdot md-sunny"></i></span><span class="wx"><i class="mdot md-joy"></i></span><span class="wx"><i class="mdot md-moon"></i></span>
+            <span class="wx"><i class="mdot md-calm"></i></span><span class="wx"><i class="mdot md-sunny"></i></span><span class="wx"><i class="mdot md-sunny"></i></span><span class="wx"><i class="mdot md-joy"></i></span><span class="wx"><i class="mdot md-calm"></i></span><span class="wx"><i class="mdot md-calm"></i></span><span class="wx"><i class="mdot md-sunny"></i></span>
+            <span class="wx"><i class="mdot md-moon"></i></span><span class="wx"><i class="mdot md-calm"></i></span><span class="wx"><i class="mdot md-sunny"></i></span><span class="wx"><i class="mdot md-joy"></i></span><span class="wx"><i class="mdot md-calm"></i></span><span class="wx blank"></span><span class="wx blank"></span>
+          </div>
+        </div>
+
+        <div class="quote">这个月，你的晴天比雨天多。最开心的是 10 月 5 日，你跑完了 5 公里。</div>
+
+        <div class="tiles" style="grid-template-columns:repeat(3,1fr)">
+          <div class="tile"><div class="v">12</div><div class="l">晴天</div></div>
+          <div class="tile"><div class="v">8</div><div class="l">多云</div></div>
+          <div class="tile"><div class="v">3</div><div class="l">雨天</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 成长时间线 ============ -->
+  <div class="frame">
+    <div class="frame-bar"><div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div><span class="frame-title">成长时间线</span><span class="frame-tag">亮点</span></div>
+    <div class="app">
+      <div class="topnav">
+        <div class="logo">云记录</div>
+        <div class="nav-links"><a>首页</a><a>记录</a><a>理想</a><a>胶囊</a><a class="on">我的</a></div>
+        <div class="avatar">鱼</div>
+      </div>
+      <div class="content">
+        <div class="page-head"><div class="t">我的成长故事</div><div class="s">记录卡和理想卡，串成一条慢慢向上的线。</div></div>
+
+        <div class="tl">
+          <div class="tl-item"><div class="dot"></div><div class="date">10月 · 现在</div><div class="card"><b>理想进行中</b> · 学会弹一首歌，已完成 7 步</div></div>
+          <div class="tl-item"><div class="dot"></div><div class="date">10月 5 日</div><div class="card"><b>开心</b> · 第一次跑完 5 公里</div></div>
+          <div class="tl-item"><div class="dot"></div><div class="date">10月 1 日</div><div class="card"><b>胶囊开启</b> · 读到三个月前写给自己的信</div></div>
+          <div class="tl-item"><div class="dot"></div><div class="date">9月</div><div class="card"><b>完成理想</b> · 早睡打卡 21 天</div></div>
+          <div class="tl-item"><div class="dot"></div><div class="date">9月 20 日</div><div class="card"><b>开始</b> · 种下「每周读完一本书」的理想</div></div>
+        </div>
+
+        <div class="note">回头看，来路清晰可见。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 成就徽章 ============ -->
+  <div class="frame">
+    <div class="frame-bar"><div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div><span class="frame-title">成就徽章</span><span class="frame-tag">二期</span></div>
+    <div class="app">
+      <div class="topnav">
+        <div class="logo">云记录</div>
+        <div class="nav-links"><a>首页</a><a>记录</a><a>理想</a><a>胶囊</a><a class="on">我的</a></div>
+        <div class="avatar">鱼</div>
+      </div>
+      <div class="content">
+        <div class="page-head"><div class="t">我的徽章</div><div class="s">每一枚徽章，都是一次小小的坚持。</div></div>
+
+        <div class="sect-t">已点亮 · 4</div>
+        <div class="badges">
+          <div class="badge"><div class="seal">初</div><div class="t">初次记录</div><div class="s">写下第一张卡</div></div>
+          <div class="badge"><div class="seal">十</div><div class="t">十张卡片</div><div class="s">写满 10 张</div></div>
+          <div class="badge"><div class="seal">七</div><div class="t">连续 7 天</div><div class="s">坚持打卡一周</div></div>
+          <div class="badge"><div class="seal">成</div><div class="t">理想达成</div><div class="s">完成第一个理想</div></div>
+          <div class="badge lock"><div class="seal">旅</div><div class="t">时空旅人</div><div class="s">开启一封胶囊</div></div>
+          <div class="badge lock"><div class="seal">满</div><div class="t">满月记录</div><div class="s">连续记录 30 天</div></div>
+        </div>
+
+        <div class="notice" style="margin-top:16px">
+          <span class="seal">待</span>
+          <span>再坚持 3 天，就能点亮「连续 7 天」。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 年度故事 ============ -->
+  <div class="frame">
+    <div class="frame-bar"><div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div><span class="frame-title">我的故事（AI）</span><span class="frame-tag">亮点</span></div>
+    <div class="app">
+      <div class="topnav">
+        <div class="logo">云记录</div>
+        <div class="nav-links"><a>首页</a><a>记录</a><a>理想</a><a>胶囊</a><a class="on">我的</a></div>
+        <div class="avatar">鱼</div>
+      </div>
+      <div class="content">
+        <div class="page-head" style="text-align:center"><div class="t">我的 2026 故事</div><div class="s">AI 把你这一年的记录，写成了一篇小故事</div></div>
+
+        <div style="background:var(--card);border:1.5px solid var(--line-strong);border-left:3px solid var(--night);border-radius:4px;padding:18px 16px;font-family:'Ma Shan Zheng','Noto Serif SC';font-size:14.5px;line-height:2;color:var(--ink);box-shadow:var(--shadow)">
+          这一年，你在春天写下第一张卡，说「想试试跑步」。<br>
+          你在夏天学会了早睡，在秋天跑完了第一个 5 公里，还在冬天到来之前，给 2027 年的自己寄出了一封信。<br><br>
+          你比去年，更接近自己想成为的样子。
+        </div>
+
+        <div class="tiles" style="grid-template-columns:repeat(3,1fr);margin-top:16px">
+          <div class="tile"><div class="v">128</div><div class="l">张卡片</div></div>
+          <div class="tile"><div class="v">6</div><div class="l">个理想</div></div>
+          <div class="tile"><div class="v">9</div><div class="l">枚徽章</div></div>
+        </div>
+
+        <button class="btn btn-p btn-block" style="margin-top:16px">分享我的故事</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 今日一句 ============ -->
+  <div class="frame">
+    <div class="frame-bar"><div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div><span class="frame-title">AI 今日一句</span><span class="frame-tag">亮点</span></div>
+    <div class="app">
+      <div class="topnav">
+        <div class="logo">云记录</div>
+        <div class="nav-links"><a class="on">首页</a><a>记录</a><a>理想</a><a>胶囊</a><a>我的</a></div>
+        <div class="avatar">鱼</div>
+      </div>
+      <div class="content" style="text-align:center;padding-top:34px">
+        <div class="profile">
+          <div class="ava">鱼</div>
+          <div class="nick">早上好，小鱼</div>
+          <div class="bio">今天也记得对自己好一点。</div>
+        </div>
+
+        <div style="margin-top:18px;background:var(--card);border:1.5px solid var(--line-strong);border-radius:4px;padding:26px 18px;box-shadow:var(--shadow)">
+          <span class="ai-tag" style="font-size:11px">AI</span>
+          <div style="font-family:'Ma Shan Zheng','Noto Serif SC';font-size:19px;color:var(--blue-deep);margin-top:10px;line-height:1.8">
+            「你最近有些累，<br>记得给自己留一点空白的时间，<br>什么都不做，也很好。」
+          </div>
+          <div class="hint" style="margin-top:12px">根据你最近的心情生成 · 每天都不一样</div>
+        </div>
+
+        <div class="row-list" style="margin-top:20px;text-align:left">
+          <div class="li"><div class="txt"><div class="t">今天还没写卡片</div><div class="s">把这句，也记下来吧</div></div><span class="tag">去写</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 种子信箱 ============ -->
+  <div class="frame">
+    <div class="frame-bar"><div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div><span class="frame-title">种子信箱（慢社交）</span><span class="frame-tag">三期</span></div>
+    <div class="app">
+      <div class="topnav">
+        <div class="logo">云记录</div>
+        <div class="nav-links"><a>首页</a><a>记录</a><a>理想</a><a>胶囊</a><a class="on">我的</a></div>
+        <div class="avatar">鱼</div>
+      </div>
+      <div class="content">
+        <div class="page-head"><div class="t">种子信箱</div><div class="s">写下一颗「种子」，随机寄给一位陌生人。</div></div>
+
+        <div class="notice">
+          <span class="seal">慢</span>
+          <div style="flex:1"><b>慢一点，也真一点</b><div style="font-size:10.5px;margin-top:2px">你的信会被随机匹配，1-3 天后收到回复</div></div>
+        </div>
+
+        <div class="row-list">
+          <div class="li"><div class="txt"><div class="t">收到 1 封回信</div><div class="s">来自一位陌生人的回应</div></div><span class="tag on">拆开</span></div>
+          <div class="li"><div class="txt"><div class="t">我寄出的种子</div><div class="s">正在旅途中，等待被回应</div></div><span class="tag ghost">旅途中</span></div>
+        </div>
+
+        <button class="btn btn-p btn-block" style="margin-top:6px">写下一颗种子</button>
+
+        <div class="note">不实时，不催促，等一封回信。</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ 话题广场 ============ -->
+  <div class="frame">
+    <div class="frame-bar"><div class="dots"><i class="dot r"></i><i class="dot y"></i><i class="dot g"></i></div><span class="frame-title">话题广场（社区）</span><span class="frame-tag">三期</span></div>
+    <div class="app">
+      <div class="topnav">
+        <div class="logo">云记录</div>
+        <div class="nav-links"><a>首页</a><a>记录</a><a>理想</a><a>胶囊</a><a>我的</a></div>
+        <div class="avatar">鱼</div>
+      </div>
+      <div class="content">
+        <div class="page-head"><div class="t">话题广场</div><div class="s">每天一个话题，安静地聊一聊。</div></div>
+
+        <div class="topic">
+          <div class="tag-line"><span class="tag on">今日话题</span><span class="time" style="font-size:10px;color:var(--ink-faint)">10月11日</span></div>
+          <div class="t">你最近一次「慢下来」是什么时候？</div>
+          <div class="s">不比较，不催促，只是分享。</div>
+          <div class="meta"><span>温和讨论</span><span>不加数字、不排名</span></div>
+        </div>
+
+        <div class="topic">
+          <div class="tag-line"><span class="tag ghost">昨天</span></div>
+          <div class="t">有没有一件小事，让你今天心情很好？</div>
+          <div class="meta"><span>只看 · 点赞</span><span>二期先不开放评论</span></div>
+        </div>
+
+        <div class="notice">
+          <span class="seal">平</span>
+          <span>这里没有粉丝数，也没有排行榜，只有真诚的表达。</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
