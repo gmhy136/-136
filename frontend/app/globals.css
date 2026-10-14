@@ -1,0 +1,11 @@
+@import "tailwindcss";
+@import "./prototype.css";
+
+/* 表单错误提示（功能必需，非原型装饰） */
+.err {
+  font-size: 11px;
+  color: #b0655f;
+  margin-top: 12px;
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+}

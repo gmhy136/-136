@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cloudrecord_test?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true&rewriteBatchedStatements=true
+    username: root
+    password: "1234"
+  ai:
+    deepseek:
+      api-key: sk-test-placeholder
+      base-url: https://api.deepseek.com
+      chat:
+        options:
+          model: deepseek-chat
+
+jwt:
+  secret: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+  access-ttl: 7200000
+  refresh-ttl: 1209600000
+
+app:
+  upload-dir: target/test-uploads

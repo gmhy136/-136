@@ -1,0 +1,21 @@
+# 复制为 application-dev.yml 并填入真实值（application-dev.yml 已加入 .gitignore，不提交）
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cloudrecord?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true&rewriteBatchedStatements=true
+    username: root
+    password: "your-db-password"
+  ai:
+    deepseek:
+      api-key: sk-xxxx
+      base-url: https://api.deepseek.com
+      chat:
+        options:
+          model: deepseek-chat
+          temperature: 0.7
+          max-tokens: 1024
+
+jwt:
+  secret: "please-generate-a-random-string-at-least-32-bytes"
+  access-ttl: 7200000
+  refresh-ttl: 1209600000

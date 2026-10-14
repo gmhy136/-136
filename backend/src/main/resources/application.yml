@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: cloudrecord
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 20MB
+  jackson:
+    time-zone: Asia/Shanghai
+
+server:
+  port: 8080
+
+app:
+  upload-dir: uploads
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    banner: false
+    db-config:
+      logic-delete-field: deleted
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    enabled: true
+
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
