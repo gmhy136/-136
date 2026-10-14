@@ -86,6 +86,8 @@ cd backend && mvn test
 cd frontend && pnpm build
 ```
 
+> 集成测试需 `backend/src/test/resources/application-test.yml`（复制自同目录 `.example`，填本机测试库口令）。
+
 ## 配置项速查
 
 | 配置 | 位置 | 说明 |

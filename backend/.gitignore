@@ -8,6 +8,7 @@ target/
 
 # 敏感配置（含数据库密码 / JWT 密钥 / DeepSeek key），不提交
 application-dev.yml
+application-test.yml
 
 # 本地上传的图片
 uploads/
