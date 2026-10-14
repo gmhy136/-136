@@ -289,6 +289,9 @@ export default function IdealDetail({ id }: { id: number }) {
                 monthCount={cal.monthCount}
                 onPrev={() => setMonth(shiftMonth(month, -1))}
                 onNext={() => setMonth(shiftMonth(month, 1))}
+                onCheckIn={() => {
+                  if (!detail.todayChecked && !checkin.isPending) checkin.mutate();
+                }}
               />
             )}
 

@@ -9,11 +9,12 @@ interface Props {
   monthCount: number;
   onPrev: () => void;
   onNext: () => void;
+  onCheckIn?: () => void;
 }
 
 const WEEKDAYS = ["一", "二", "三", "四", "五", "六", "日"];
 
-export default function Calendar({ month, days, streakDays, monthCount, onPrev, onNext }: Props) {
+export default function Calendar({ month, days, streakDays, monthCount, onPrev, onNext, onCheckIn }: Props) {
   const cells = buildCalendarGrid(month, days);
 
   return (
@@ -30,12 +31,23 @@ export default function Calendar({ month, days, streakDays, monthCount, onPrev, 
           ))}
           {cells.map((c, i) => {
             const cls = c.off ? "d off" : c.done ? "d done" : c.today ? "d today" : "d";
-            return <span key={i} className={cls}>{c.day}</span>;
+            const clickable = !!onCheckIn && c.today && !c.done;
+            return (
+              <span
+                key={i}
+                className={cls}
+                style={clickable ? { cursor: "pointer" } : undefined}
+                title={clickable ? "点击完成今日打卡" : undefined}
+                onClick={clickable ? onCheckIn : undefined}
+              >
+                {c.day}
+              </span>
+            );
           })}
         </div>
         <div className="legend-cal">
           <span><i />已打卡</span>
-          <span>今天 · 记得打卡</span>
+          <span>今天 · 点击打卡</span>
         </div>
       </div>
 

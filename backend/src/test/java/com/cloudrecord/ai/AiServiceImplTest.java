@@ -2,10 +2,14 @@ package com.cloudrecord.ai;
 
 import com.cloudrecord.common.BizException;
 import com.cloudrecord.entity.AiUsageLog;
+import com.cloudrecord.entity.DailyQuote;
 import com.cloudrecord.entity.Mood;
 import com.cloudrecord.mapper.AiUsageLogMapper;
+import com.cloudrecord.mapper.DailyQuoteMapper;
 import com.cloudrecord.mapper.MoodMapper;
+import com.cloudrecord.mapper.RecordCardMapper;
 import com.cloudrecord.vo.AiRemainingVO;
+import com.cloudrecord.vo.DailyQuoteVO;
 import com.cloudrecord.vo.StyleRecommendationVO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
@@ -16,10 +20,14 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import reactor.core.publisher.Flux;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -36,16 +44,27 @@ class AiServiceImplTest {
     @Mock
     private MoodMapper moodMapper;
 
+    @Mock
+    private RecordCardMapper recordCardMapper;
+
+    @Mock
+    private DailyQuoteMapper dailyQuoteMapper;
+
     private AiServiceImpl aiService;
 
     @BeforeEach
     void setUp() {
-        aiService = new AiServiceImpl(deepSeekClient, aiUsageLogMapper, moodMapper, new ObjectMapper());
+        aiService = new AiServiceImpl(deepSeekClient, aiUsageLogMapper, moodMapper,
+                recordCardMapper, dailyQuoteMapper, new ObjectMapper());
     }
 
     private Mood mood(String name) {
+        return mood(1, name);
+    }
+
+    private Mood mood(Integer id, String name) {
         Mood m = new Mood();
-        m.setId(1);
+        m.setId(id);
         m.setName(name);
         return m;
     }
@@ -190,13 +209,13 @@ class AiServiceImplTest {
 
     @Test
     void remaining_returnsMinAcrossScenes() {
-        when(aiUsageLogMapper.selectCount(any())).thenReturn(5L, 10L, 15L);
+        when(aiUsageLogMapper.selectCount(any())).thenReturn(5L, 10L, 15L, 0L);
 
         AiRemainingVO vo = aiService.remaining(1L);
 
         assertThat(vo.getLimit()).isEqualTo(20);
         assertThat(vo.getRemaining()).isEqualTo(5);
-        verify(aiUsageLogMapper, times(3)).selectCount(any());
+        verify(aiUsageLogMapper, times(4)).selectCount(any());
     }
 
     @Test
@@ -206,5 +225,59 @@ class AiServiceImplTest {
         AiRemainingVO vo = aiService.remaining(1L);
 
         assertThat(vo.getRemaining()).isZero();
+    }
+
+    @Test
+    void dailyQuote_generatesAndCaches() {
+        when(dailyQuoteMapper.selectOne(any())).thenReturn(null);
+        when(aiUsageLogMapper.selectCount(any())).thenReturn(0L);
+        when(recordCardMapper.selectRecentMoodIds(any(), anyInt())).thenReturn(List.of(1, 3));
+        when(moodMapper.selectList(any())).thenReturn(List.of(mood(1, "开心"), mood(3, "小确幸")));
+        when(deepSeekClient.call(anyString(), anyString(), any())).thenReturn("  记得给自己留一点温柔。  ");
+
+        DailyQuoteVO vo = aiService.dailyQuote(1L);
+
+        assertThat(vo.getContent()).isEqualTo("记得给自己留一点温柔。");
+        verify(dailyQuoteMapper).insert(any(DailyQuote.class));
+
+        ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+        verify(deepSeekClient).call(anyString(), captor.capture(), any());
+        assertThat(captor.getValue()).contains("开心").contains("小确幸");
+    }
+
+    @Test
+    void dailyQuote_returnsCachedWithoutCounting() {
+        DailyQuote cached = new DailyQuote();
+        cached.setContent("已缓存");
+        when(dailyQuoteMapper.selectOne(any())).thenReturn(cached);
+
+        DailyQuoteVO vo = aiService.dailyQuote(1L);
+
+        assertThat(vo.getContent()).isEqualTo("已缓存");
+        verify(aiUsageLogMapper, never()).insert(any(AiUsageLog.class));
+        verify(deepSeekClient, never()).call(anyString(), anyString(), any());
+    }
+
+    @Test
+    void dailyQuote_deepSeekFails_fallsBack() {
+        when(dailyQuoteMapper.selectOne(any())).thenReturn(null);
+        when(aiUsageLogMapper.selectCount(any())).thenReturn(0L);
+        when(recordCardMapper.selectRecentMoodIds(any(), anyInt())).thenReturn(List.of());
+        when(deepSeekClient.call(anyString(), anyString(), any())).thenThrow(new RuntimeException("boom"));
+
+        DailyQuoteVO vo = aiService.dailyQuote(1L);
+
+        assertThat(vo.getContent()).isNotEmpty();
+        verify(dailyQuoteMapper).insert(any(DailyQuote.class));
+    }
+
+    @Test
+    void dailyQuote_overLimit_throws429() {
+        when(dailyQuoteMapper.selectOne(any())).thenReturn(null);
+        when(aiUsageLogMapper.selectCount(any())).thenReturn(20L);
+
+        assertThatThrownBy(() -> aiService.dailyQuote(1L))
+                .isInstanceOfSatisfying(BizException.class,
+                        e -> assertThat(e.getCode()).isEqualTo(429));
     }
 }

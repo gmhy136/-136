@@ -9,6 +9,7 @@ import com.cloudrecord.dto.SplitIdealRequest;
 import com.cloudrecord.dto.StyleRequest;
 import com.cloudrecord.security.UserContext;
 import com.cloudrecord.vo.AiRemainingVO;
+import com.cloudrecord.vo.DailyQuoteVO;
 import com.cloudrecord.vo.StyleRecommendationVO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
@@ -73,6 +74,11 @@ public class AiController {
     @GetMapping("/remaining")
     public Result<AiRemainingVO> remaining() {
         return Result.ok(aiService.remaining(UserContext.requireUserId()));
+    }
+
+    @GetMapping("/daily-quote")
+    public Result<DailyQuoteVO> dailyQuote() {
+        return Result.ok(aiService.dailyQuote(UserContext.requireUserId()));
     }
 
     private void send(SseEmitter emitter, Map<String, ?> payload) {

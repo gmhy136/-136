@@ -19,4 +19,9 @@ public record AiParams(double temperature, int maxTokens) {
     public static AiParams split() {
         return new AiParams(0.2, 512);
     }
+
+    /** 今日一句：温度 0.9、max_tokens 128（更有灵气，短句足够）。 */
+    public static AiParams quote() {
+        return new AiParams(0.9, 128);
+    }
 }

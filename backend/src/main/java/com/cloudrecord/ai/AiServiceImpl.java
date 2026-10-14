@@ -3,10 +3,14 @@ package com.cloudrecord.ai;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.cloudrecord.common.BizException;
 import com.cloudrecord.entity.AiUsageLog;
+import com.cloudrecord.entity.DailyQuote;
 import com.cloudrecord.entity.Mood;
 import com.cloudrecord.mapper.AiUsageLogMapper;
+import com.cloudrecord.mapper.DailyQuoteMapper;
 import com.cloudrecord.mapper.MoodMapper;
+import com.cloudrecord.mapper.RecordCardMapper;
 import com.cloudrecord.vo.AiRemainingVO;
+import com.cloudrecord.vo.DailyQuoteVO;
 import com.cloudrecord.vo.StyleRecommendationVO;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -16,7 +20,9 @@ import reactor.core.publisher.Flux;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -30,8 +36,10 @@ public class AiServiceImpl implements AiService {
     private static final String SCENE_EXPAND = "EXPAND";
     private static final String SCENE_STYLE = "STYLE";
     private static final String SCENE_SPLIT = "IDEAL_SPLIT";
+    private static final String SCENE_QUOTE = "DAILY_QUOTE";
     private static final String DEFAULT_STYLE_KEY = "paper-white";
     private static final String FALLBACK_REASON = "随心一点，素白也不错";
+    private static final String FALLBACK_QUOTE = "今天也记得对自己好一点。";
 
     /** 与方案设计文档 §14.3 一致的长 key。 */
     private static final Set<String> STYLE_KEYS = Set.of(
@@ -43,6 +51,8 @@ public class AiServiceImpl implements AiService {
     private final DeepSeekClient deepSeekClient;
     private final AiUsageLogMapper aiUsageLogMapper;
     private final MoodMapper moodMapper;
+    private final RecordCardMapper recordCardMapper;
+    private final DailyQuoteMapper dailyQuoteMapper;
     private final ObjectMapper objectMapper;
 
     @Override
@@ -82,7 +92,7 @@ public class AiServiceImpl implements AiService {
     @Override
     public AiRemainingVO remaining(Long userId) {
         int min = DAILY_LIMIT;
-        for (String scene : List.of(SCENE_EXPAND, SCENE_STYLE, SCENE_SPLIT)) {
+        for (String scene : List.of(SCENE_EXPAND, SCENE_STYLE, SCENE_SPLIT, SCENE_QUOTE)) {
             long count = aiUsageLogMapper.selectCount(new LambdaQueryWrapper<AiUsageLog>()
                     .eq(AiUsageLog::getUserId, userId)
                     .eq(AiUsageLog::getScene, scene)
@@ -90,6 +100,38 @@ public class AiServiceImpl implements AiService {
             min = Math.min(min, (int) (DAILY_LIMIT - count));
         }
         return new AiRemainingVO(DAILY_LIMIT, Math.max(0, min));
+    }
+
+    @Override
+    public DailyQuoteVO dailyQuote(Long userId) {
+        LocalDate today = LocalDate.now();
+        DailyQuote existing = dailyQuoteMapper.selectOne(new LambdaQueryWrapper<DailyQuote>()
+                .eq(DailyQuote::getUserId, userId)
+                .eq(DailyQuote::getQuoteDate, today));
+        if (existing != null) {
+            return DailyQuoteVO.builder().content(existing.getContent()).build();
+        }
+
+        checkAndCount(userId, SCENE_QUOTE);
+        String content = FALLBACK_QUOTE;
+        try {
+            String raw = deepSeekClient.call(SYSTEM_PROMPT, buildQuotePrompt(recentMoodSummary(userId)), AiParams.quote());
+            if (raw != null && !raw.isBlank()) {
+                content = raw.trim();
+                if (content.length() > 120) {
+                    content = content.substring(0, 120);
+                }
+            }
+        } catch (Exception ignored) {
+            // 失败降级为固定句
+        }
+
+        DailyQuote quote = new DailyQuote();
+        quote.setUserId(userId);
+        quote.setQuoteDate(today);
+        quote.setContent(content);
+        dailyQuoteMapper.insert(quote);
+        return DailyQuoteVO.builder().content(content).build();
     }
 
     /** 校验今日额度并计次；超限抛 429。返回本次调用后的剩余次数。 */
@@ -114,6 +156,40 @@ public class AiServiceImpl implements AiService {
         }
         Mood mood = moodMapper.selectById(moodId);
         return mood == null ? null : mood.getName();
+    }
+
+    /** 用户最近几条记录的心情名（去重、顿号拼接），供今日一句参考；无则返回 null。 */
+    private String recentMoodSummary(Long userId) {
+        List<Integer> moodIds = recordCardMapper.selectRecentMoodIds(userId, 5);
+        if (moodIds.isEmpty()) {
+            return null;
+        }
+        Map<Integer, Mood> map = moodMap();
+        List<String> names = new ArrayList<>();
+        for (Integer moodId : moodIds) {
+            Mood mood = map.get(moodId);
+            if (mood != null && !names.contains(mood.getName())) {
+                names.add(mood.getName());
+            }
+        }
+        return names.isEmpty() ? null : String.join("、", names);
+    }
+
+    private Map<Integer, Mood> moodMap() {
+        Map<Integer, Mood> map = new HashMap<>();
+        for (Mood mood : moodMapper.selectList(null)) {
+            map.put(mood.getId(), mood);
+        }
+        return map;
+    }
+
+    private String buildQuotePrompt(String moodSummary) {
+        if (moodSummary == null) {
+            return "请写一句温柔、真诚、不鸡汤的话，鼓励用户记录今天的生活，30 字以内。"
+                    + "直接输出这句话本身，不要引号，不要任何解释。";
+        }
+        return "用户最近的心情是：" + moodSummary + "。请结合这些心情，写一句温柔、真诚、不鸡汤的话，"
+                + "鼓励用户记录今天的生活，30 字以内。直接输出这句话本身，不要引号，不要任何解释。";
     }
 
     private String buildExpandPrompt(String content, String moodName) {

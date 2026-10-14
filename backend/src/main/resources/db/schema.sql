@@ -1,6 +1,6 @@
 -- =========================================================
 -- 云记录 · 建表脚本（MySQL 9.5 · utf8mb4）
--- 10 张表 + mood 种子数据
+-- 11 张表 + mood 种子数据
 -- 通用约定：主键 BIGINT AUTO_INCREMENT；created_at/updated_at 由 MyBatis-Plus 自动填充
 -- =========================================================
 SET NAMES utf8mb4;
@@ -131,6 +131,17 @@ CREATE TABLE IF NOT EXISTS `email_code` (
   PRIMARY KEY (`id`),
   KEY `idx_emailcode_email` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='邮箱验证码';
+
+-- 11. AI 今日一句（每人每天缓存一条）
+CREATE TABLE IF NOT EXISTS `daily_quote` (
+  `id`         BIGINT       NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `user_id`    BIGINT       NOT NULL COMMENT '用户',
+  `quote_date` DATE         NOT NULL COMMENT '日期',
+  `content`    VARCHAR(512) NOT NULL COMMENT '句子内容',
+  `created_at` DATETIME     NOT NULL COMMENT '生成时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_quote_user_date` (`user_id`, `quote_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='AI 每日一句';
 
 -- 心情种子数据（去 emoji，心情点样式与原型一致）
 INSERT IGNORE INTO `mood` (`id`, `name`, `emoji`, `weather_icon`, `sort_order`) VALUES

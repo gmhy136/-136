@@ -150,3 +150,35 @@ export interface Overview {
   recentRecords: RecordCard[];
   ideals: IdealCard[];
 }
+
+/** 心情天气月报（对应后端 MoodReportVO）。 */
+export interface MoodReport {
+  month: string;
+  days: Record<number, string>;
+  sunnyCount: number;
+  cloudyCount: number;
+  rainyCount: number;
+  quote: string;
+}
+
+/** 成长时间线事件（对应后端 TimelineEventVO）。 */
+export interface TimelineEvent {
+  date: string;
+  type: "RECORD" | "IDEAL_ACTIVE" | "IDEAL_START" | "IDEAL_DONE" | "CAPSULE_OPEN";
+  label: string;
+  detail: string;
+}
+
+/** 成就徽章（对应后端 BadgeVO）。 */
+export interface Badge {
+  key: string;
+  seal: string;
+  name: string;
+  desc: string;
+  unlocked: boolean;
+}
+
+/** AI 今日一句（对应后端 DailyQuoteVO）。 */
+export interface DailyQuote {
+  content: string;
+}

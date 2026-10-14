@@ -1,6 +1,7 @@
 package com.cloudrecord.ai;
 
 import com.cloudrecord.vo.AiRemainingVO;
+import com.cloudrecord.vo.DailyQuoteVO;
 import com.cloudrecord.vo.StyleRecommendationVO;
 
 /**
@@ -19,4 +20,7 @@ public interface AiService {
 
     /** 今日剩余 AI 次数（各场景取最小剩余，不计次）。 */
     AiRemainingVO remaining(Long userId);
+
+    /** AI 今日一句（每人每天一条，按日缓存；失败降级为固定句）。 */
+    DailyQuoteVO dailyQuote(Long userId);
 }

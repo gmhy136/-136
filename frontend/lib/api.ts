@@ -2,20 +2,24 @@ import { clearTokens, getAccessToken, getRefreshToken, setTokens } from "./auth"
 import type {
   AiRemaining,
   AuthResponse,
+  Badge,
   CapsuleCard,
   CapsuleDetail,
   CapsuleInput,
+  DailyQuote,
   IdealCalendar,
   IdealCard,
   IdealDetail,
   IdealInput,
   IdealTask,
   Mood,
+  MoodReport,
   Overview,
   PageVO,
   RecordCard,
   RecordInput,
   SplitIdealResult,
+  TimelineEvent,
   User,
 } from "./types";
 
@@ -121,6 +125,23 @@ export function getOverview(): Promise<Overview> {
 
 export function getAiRemaining(): Promise<AiRemaining> {
   return api<AiRemaining>("/ai/remaining");
+}
+
+export function getDailyQuote(): Promise<DailyQuote> {
+  return api<DailyQuote>("/ai/daily-quote");
+}
+
+export function getMoodReport(month?: string): Promise<MoodReport> {
+  const q = month ? `?month=${month}` : "";
+  return api<MoodReport>(`/reports/mood${q}`);
+}
+
+export function getTimeline(): Promise<TimelineEvent[]> {
+  return api<TimelineEvent[]>("/reports/timeline");
+}
+
+export function getBadges(): Promise<Badge[]> {
+  return api<Badge[]>("/badges");
 }
 
 export function listMoods(): Promise<Mood[]> {

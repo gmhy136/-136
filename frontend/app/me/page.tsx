@@ -219,6 +219,31 @@ export default function MePage() {
           </div>
         )}
 
+        <div className="sect-t">亮点</div>
+        <div className="row-list">
+          <Link href="/me/mood" className="li" style={{ textDecoration: "none" }}>
+            <div className="txt">
+              <div className="t">心情天气月报</div>
+              <div className="s">把每一天的心情，画成一张天气图。</div>
+            </div>
+            <span className="tag">查看</span>
+          </Link>
+          <Link href="/me/timeline" className="li" style={{ textDecoration: "none" }}>
+            <div className="txt">
+              <div className="t">成长时间线</div>
+              <div className="s">记录卡和理想卡，串成一条向上的线。</div>
+            </div>
+            <span className="tag">查看</span>
+          </Link>
+          <Link href="/me/badges" className="li" style={{ textDecoration: "none" }}>
+            <div className="txt">
+              <div className="t">成就徽章</div>
+              <div className="s">每一枚徽章，都是一次小小的坚持。</div>
+            </div>
+            <span className="tag">查看</span>
+          </Link>
+        </div>
+
         <Link href="/settings" className="btn btn-g btn-block" style={{ marginTop: 18 }}>
           基础设置
         </Link>
