@@ -6,3 +6,6 @@ desktop.ini
 # Claude Code 本地工具配置（非项目内容）
 .agents/
 skills-lock.json
+
+# 部署环境变量（含数据库口令 / JWT 密钥 / DeepSeek Key），不提交
+.env

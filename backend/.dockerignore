@@ -1,0 +1,8 @@
+target/
+.idea/
+.vscode/
+*.iml
+*.log
+uploads/
+application-dev.yml
+application-test.yml
