@@ -182,3 +182,154 @@ export interface Badge {
 export interface DailyQuote {
   content: string;
 }
+
+/** 好友（对应后端 FriendVO）。 */
+export interface Friend {
+  id: number;
+  nickname: string;
+  avatarUrl: string | null;
+  bio: string | null;
+  since: string;
+}
+
+/** 好友申请（对应后端 FriendRequestVO）。 */
+export interface FriendRequest {
+  id: number;
+  userId: number;
+  nickname: string;
+  avatarUrl: string | null;
+  createdAt: string;
+}
+
+/** 好友申请汇总。 */
+export interface FriendRequests {
+  received: FriendRequest[];
+  sent: FriendRequest[];
+}
+
+/** 邀请链接（对应后端 InviteVO）。 */
+export interface Invite {
+  token: string;
+  url: string;
+  expiresAt: string;
+}
+
+/** 问答列表项（对应后端 QuizVO）。 */
+export interface QuizCard {
+  id: number;
+  title: string;
+  description: string | null;
+  status: "DRAFT" | "PUBLISHED";
+  questionCount: number;
+  publishedAt: string | null;
+  createdAt: string;
+}
+
+/** 出题人视角选项（含是否正确）。 */
+export interface QuizOption {
+  id: number;
+  label: string;
+  isCorrect: boolean;
+}
+
+/** 出题人视角题目（含答案）。 */
+export interface QuizQuestion {
+  id: number;
+  type: "CHOICE" | "JUDGE";
+  content: string;
+  judgeAnswer: boolean | null;
+  options: QuizOption[];
+}
+
+/** 出题人视角详情（含答案）。 */
+export interface QuizDetail {
+  id: number;
+  title: string;
+  description: string | null;
+  status: "DRAFT" | "PUBLISHED";
+  publishedAt: string | null;
+  createdAt: string;
+  questions: QuizQuestion[];
+}
+
+/** 朋友圈题目（对应后端 FeedQuizVO）。 */
+export interface FeedQuiz {
+  id: number;
+  title: string;
+  description: string | null;
+  questionCount: number;
+  publishedAt: string;
+  ownerId: number;
+  ownerNickname: string;
+  ownerAvatarUrl: string | null;
+  answered: boolean;
+}
+
+/** 答题视角选项（不含答案）。 */
+export interface PlayOption {
+  id: number;
+  label: string;
+}
+
+/** 答题视角题目（不含答案）。 */
+export interface PlayQuestion {
+  id: number;
+  type: "CHOICE" | "JUDGE";
+  content: string;
+  options: PlayOption[];
+}
+
+/** 答题视角（对应后端 PlayQuizVO）。 */
+export interface PlayQuiz {
+  id: number;
+  title: string;
+  description: string | null;
+  questionCount: number;
+  questions: PlayQuestion[];
+}
+
+/** 单题答题结果。 */
+export interface AnswerItemResult {
+  questionId: number;
+  isCorrect: boolean;
+  correctOptionId: number | null;
+  correctBool: boolean | null;
+}
+
+/** 答题结果（对应后端 AnswerResultVO）。 */
+export interface AnswerResult {
+  score: number;
+  total: number;
+  items: AnswerItemResult[];
+}
+
+/** 出题入参。 */
+export interface OptionInput {
+  label: string;
+  isCorrect: boolean;
+}
+
+export interface QuestionInput {
+  type: "CHOICE" | "JUDGE";
+  content: string;
+  options?: OptionInput[];
+  judgeAnswer?: boolean | null;
+}
+
+export interface CreateQuizInput {
+  title: string;
+  description: string | null;
+  questions: QuestionInput[];
+}
+
+/** 答题入参。 */
+export interface AnswerInput {
+  questionId: number;
+  optionId?: number | null;
+  chosenBool?: boolean | null;
+}
+
+export interface SubmitAnswerInput {
+  anonymous: boolean;
+  answers: AnswerInput[];
+}

@@ -9,6 +9,8 @@ const LINKS = [
   { href: "/record", label: "记录" },
   { href: "/ideal", label: "理想" },
   { href: "/capsule", label: "胶囊" },
+  { href: "/friends", label: "朋友" },
+  { href: "/feed", label: "问答" },
   { href: "/me", label: "我的" },
 ];
 

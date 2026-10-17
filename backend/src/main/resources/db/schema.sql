@@ -1,6 +1,6 @@
 -- =========================================================
 -- 云记录 · 建表脚本（MySQL 9.5 · utf8mb4）
--- 11 张表 + mood 种子数据
+-- 18 张表 + mood 种子数据
 -- 通用约定：主键 BIGINT AUTO_INCREMENT；created_at/updated_at 由 MyBatis-Plus 自动填充
 -- =========================================================
 SET NAMES utf8mb4;
@@ -142,6 +142,93 @@ CREATE TABLE IF NOT EXISTS `daily_quote` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `uk_quote_user_date` (`user_id`, `quote_date`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='AI 每日一句';
+
+-- 12. 好友关系（双向确认：申请 → 接受）
+CREATE TABLE IF NOT EXISTS `friendship` (
+  `id`           BIGINT      NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `requester_id` BIGINT      NOT NULL COMMENT '发起方用户',
+  `addressee_id` BIGINT      NOT NULL COMMENT '接收方用户',
+  `status`       VARCHAR(16) NOT NULL DEFAULT 'PENDING' COMMENT 'PENDING / ACCEPTED / REJECTED',
+  `created_at`   DATETIME    NOT NULL COMMENT '申请时间',
+  `updated_at`   DATETIME    NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_friend_pair` (`requester_id`, `addressee_id`),
+  KEY `idx_friend_addressee` (`addressee_id`, `status`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='好友关系';
+
+-- 13. 好友邀请链接
+CREATE TABLE IF NOT EXISTS `friend_invite` (
+  `id`         BIGINT      NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `inviter_id` BIGINT      NOT NULL COMMENT '邀请人',
+  `token`      VARCHAR(64) NOT NULL COMMENT '邀请 token',
+  `expires_at` DATETIME    NOT NULL COMMENT '过期时间',
+  `created_at` DATETIME    NOT NULL COMMENT '生成时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_invite_token` (`token`),
+  KEY `idx_invite_inviter` (`inviter_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='好友邀请链接';
+
+-- 14. 问答游戏
+CREATE TABLE IF NOT EXISTS `quiz` (
+  `id`           BIGINT       NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `owner_id`     BIGINT       NOT NULL COMMENT '出题人',
+  `title`        VARCHAR(128) NOT NULL COMMENT '标题',
+  `description`  VARCHAR(512) DEFAULT NULL COMMENT '简介',
+  `status`       VARCHAR(16)  NOT NULL DEFAULT 'DRAFT' COMMENT 'DRAFT / PUBLISHED',
+  `published_at` DATETIME     DEFAULT NULL COMMENT '发布时间',
+  `created_at`   DATETIME     NOT NULL COMMENT '创建时间',
+  `updated_at`   DATETIME     NOT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`),
+  KEY `idx_quiz_owner` (`owner_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='问答游戏';
+
+-- 15. 题目
+CREATE TABLE IF NOT EXISTS `quiz_question` (
+  `id`           BIGINT       NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `quiz_id`      BIGINT       NOT NULL COMMENT '所属游戏',
+  `type`         VARCHAR(16)  NOT NULL COMMENT 'CHOICE / JUDGE',
+  `content`      VARCHAR(512) NOT NULL COMMENT '题干',
+  `judge_answer` TINYINT      DEFAULT NULL COMMENT '判断题答案 1 对 / 0 错',
+  `sort_order`   INT          NOT NULL DEFAULT 0 COMMENT '顺序',
+  PRIMARY KEY (`id`),
+  KEY `idx_question_quiz` (`quiz_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='问答题目';
+
+-- 16. 选择题选项
+CREATE TABLE IF NOT EXISTS `quiz_option` (
+  `id`          BIGINT       NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `question_id` BIGINT       NOT NULL COMMENT '所属题目',
+  `label`       VARCHAR(255) NOT NULL COMMENT '选项文字',
+  `is_correct`  TINYINT      NOT NULL DEFAULT 0 COMMENT '是否正确答案',
+  `sort_order`  INT          NOT NULL DEFAULT 0 COMMENT '顺序',
+  PRIMARY KEY (`id`),
+  KEY `idx_option_question` (`question_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='选择题选项';
+
+-- 17. 答题记录（一次作答）
+CREATE TABLE IF NOT EXISTS `quiz_answer` (
+  `id`         BIGINT   NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `quiz_id`    BIGINT   NOT NULL COMMENT '所属游戏',
+  `user_id`    BIGINT   NOT NULL COMMENT '答题人',
+  `anonymous`  TINYINT  NOT NULL DEFAULT 0 COMMENT '是否匿名',
+  `score`      INT      NOT NULL DEFAULT 0 COMMENT '答对题数',
+  `created_at` DATETIME NOT NULL COMMENT '作答时间',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `uk_answer_quiz_user` (`quiz_id`, `user_id`),
+  KEY `idx_answer_quiz` (`quiz_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='答题记录';
+
+-- 18. 答题明细
+CREATE TABLE IF NOT EXISTS `quiz_answer_item` (
+  `id`               BIGINT  NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `answer_id`        BIGINT  NOT NULL COMMENT '所属作答',
+  `question_id`      BIGINT  NOT NULL COMMENT '题目',
+  `chosen_option_id` BIGINT  DEFAULT NULL COMMENT '选择题所选选项',
+  `chosen_bool`      TINYINT DEFAULT NULL COMMENT '判断题所选 1 / 0',
+  `is_correct`       TINYINT NOT NULL DEFAULT 0 COMMENT '是否答对',
+  PRIMARY KEY (`id`),
+  KEY `idx_item_answer` (`answer_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='答题明细';
 
 -- 心情种子数据（去 emoji，心情点样式与原型一致）
 INSERT IGNORE INTO `mood` (`id`, `name`, `emoji`, `weather_icon`, `sort_order`) VALUES
